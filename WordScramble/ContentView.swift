@@ -29,16 +29,23 @@ struct ContentView: View {
                 Section {
                     ForEach(usedWords, id: \.self) {word in
                         HStack {
-                            Image(systemName: "\(word.count).circle")
+                            Spacer()
                             Text(word)
+                                .padding(10)
+                            Spacer()
                         }
+                        .background(.green)
+                        .clipShape(Capsule())
+                        .font(.title2)
+                        .foregroundColor(.white)
                     }
                 }
                 
                 Section {
                     
                     VStack {
-                        Text("How confident are you?").foregroundColor(.teal)
+                        Text("How confident are you?")
+                            .foregroundColor(.blue)
                         Picker(selection: $selectionA, label: Text("Pick one:")) {
                             Image(systemName: "tortoise.fill").tag(1)
                             Image(systemName: "hare.fill").tag(2)
