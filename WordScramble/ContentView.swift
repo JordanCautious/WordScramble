@@ -92,7 +92,7 @@ struct ContentView: View {
         }
         
         guard isReal(word: answer) else {
-            wordError(title: "Word not recognized", message: "You do know that you can't just make up words, right?!")
+            wordError(title: "Word not recognized", message: "You do know that you can't just make up words, right?")
             return
         }
         
