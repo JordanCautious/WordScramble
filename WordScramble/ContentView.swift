@@ -42,16 +42,27 @@ struct ContentView: View {
                 }
                 
                 Section {
-                    
                     VStack {
                         Text("How confident are you?")
-                            .foregroundColor(.blue)
+                            .foregroundColor(.teal)
                         Picker(selection: $selectionA, label: Text("Pick one:")) {
                             Image(systemName: "tortoise.fill").tag(1)
                             Image(systemName: "hare.fill").tag(2)
                             Image(systemName: "bolt.fill").tag(3)
                         }
                         .pickerStyle(.segmented)
+                    }
+                }
+                
+                Section {
+                    HStack {
+                        Spacer()
+                        Button(action: startGame) {
+                            Label("Start a new game?", systemImage: "forward.fill")
+                        }
+                        .foregroundColor(.teal)
+                        .font(.title2)
+                        Spacer()
                     }
                 }
             }
