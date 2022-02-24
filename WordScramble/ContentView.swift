@@ -21,11 +21,13 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
+                // Enter your word
                 Section {
                     TextField("Enter your word", text: $newWord)
                         .autocapitalization(.none)
                 }
                 
+                // Correct words guessed
                 Section {
                     ForEach(usedWords, id: \.self) {word in
                         HStack {
@@ -41,6 +43,7 @@ struct ContentView: View {
                     }
                 }
                 
+                // Confidence Picker
                 Section {
                     VStack {
                         Text("How confident are you?")
@@ -54,6 +57,7 @@ struct ContentView: View {
                     }
                 }
                 
+                // Button to start a new game
                 Section {
                     HStack {
                         Spacer()
@@ -77,6 +81,7 @@ struct ContentView: View {
         }
     }
     
+    // Returns errors if the word has already been used, not possible, or not valid
     func addNewWord() {
         let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         guard answer.count > 0 else { return }
@@ -103,6 +108,7 @@ struct ContentView: View {
         newWord = ""
     }
     
+    // Picks a random word from the list to start
     func startGame() {
         if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
             if let startWords = try? String(contentsOf: startWordsURL) {
@@ -117,10 +123,12 @@ struct ContentView: View {
         
     }
     
+    // Logic needed to see if the word is original
     func isOriginal(word: String) -> Bool {
         !usedWords.contains(word)
     }
     
+    // Logic needed to see if the word is possible
     func isPossible(word: String) -> Bool {
         var tempWord = rootWord
         
@@ -135,6 +143,7 @@ struct ContentView: View {
         return true
     }
     
+    // Logic needed to see if the word is real/valid
     func isReal(word: String) -> Bool {
         let checker = UITextChecker()
         let range = NSRange(location: 0, length: word.utf16.count)
@@ -143,6 +152,7 @@ struct ContentView: View {
         return misspelledRange.location == NSNotFound
     }
     
+    // Provides framework needed for word error
     func wordError(title: String, message: String) {
         errorTitle = title
         errorMessage = message
